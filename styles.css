@@ -1,3 +1,5 @@
 body{
     text-align: center;
+    background-image: url('house_image.jpeg');
+    background-size: cover;
 }

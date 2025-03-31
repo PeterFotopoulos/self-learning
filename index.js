@@ -1,7 +1,5 @@
-var hello = " "
+import { NextResponse } from 'next/server';
 
-var hey =  process.env.test_var
-
-function alert(){
-    alert(hey)
+export async function GET() {
+  return NextResponse.json({ ok: true });
 }
