@@ -1,16 +1,16 @@
-
 {
   "crons": [
-  {
-    "name": "self-learning",
-    "path": "/api/cron",
-    "command": "node self-learning/script.js",
-    "schedule": "0 10 * * *"
-  }
-]
+    {
+      "path": "/api/every-minute",
+      "schedule": "* * * * *"
+    },
+    {
+      "path": "/api/every-hour",
+      "schedule": "0 * * * *"
+    },
+    {
+      "path": "/api/every-day",
+      "schedule": "0 0 * * *"
+    }
+  ]
 }
-
-
-
-
-
