@@ -2,4 +2,53 @@ body{
     text-align: center;
     background-image: url('house_image.jpeg');
     background-size: cover;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+p{
+    font-size: 1.5em;
+
+    margin: auto;
+}
+
+div{
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    padding: 20px;
+    margin: auto;
+    margin-top: 50px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width:45%;
+    
+} 
+
+button{
+    background-color: #4c96af;
+    border: none;
+    color: white;
+    padding: 15px 3.5%;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 12px;
+    
+}
+
+button:hover{
+    background-color: #3b7a8c;
+}
+
+h1{
+    color: #093d5d;
+    font-size: 2.5em;
+    margin-top: 20px;
+    
+}
+
+h3{
+    color: #093d5d;
+    
 }

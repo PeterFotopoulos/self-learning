@@ -1,6 +1,29 @@
+
+
+
+
 {
-    "crons": [{
-      "path": "/api/cron",
-      "schedule": "0 10 * * *"
-    }]
-  }
+    "name": "self-learning",
+    "version": "1.0.0",
+    "main": "script.cjs",
+    "type": "commonjs",
+    "scripts": {
+      "start": "node script.cjs"
+    },
+    "dependencies": {
+      "node-cron": "^3.0.0"
+    },
+
+      "crons": [
+      {
+        "name": "self-learning",
+        "command": "node self-learning/script.js",
+        "schedule": "0 10 * * *"
+      }
+    ]
+}
+  
+  
+    
+
+
