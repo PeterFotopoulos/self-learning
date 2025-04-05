@@ -26,7 +26,7 @@ button{
     background-color: #4c96af;
     border: none;
     color: white;
-    padding: 15px 3.5%;
+    padding: 15px 1%;
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -34,6 +34,7 @@ button{
     margin: 4px 2px;
     cursor: pointer;
     border-radius: 12px;
+    max-width: 300px;
     
 }
 
