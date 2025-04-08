@@ -1,11 +1,11 @@
 export default function handler(req, res) {
-    // Example action: Log a message
+    // Set the message you want to display
+    const message = "Today's daily task has been completed successfully!";
+
+    // Log the message (optional)
     console.log("Cron job triggered: /api/every-day");
+    console.log(`Message: ${message}`);
 
-    // Example action: Perform a task (e.g., send a notification)
-    const today = new Date();
-    console.log(`Performing daily task on ${today.toISOString()}`);
-
-    // Respond to the cron job trigger
-    res.status(200).send("Daily task executed successfully");
+    // Respond with the message
+    res.status(200).send(message);
 }
