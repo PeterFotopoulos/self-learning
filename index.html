@@ -43,7 +43,7 @@
 
 <script>
     // Fetch the message from the API
-    fetch('https://stratamanagement-navy.vercel.app/api/every-day')
+    fetch('https://stratamanagement-navy.vercel.app/api/every-day', { method: 'GET' })
         .then(response => response.text()) // Get the response as plain text
         .then(message => {
             // Update the content of the placeholder
