@@ -41,16 +41,26 @@
 <div id="daily-task-message">Loading daily task message...</div>
 
 <script>
-    // Fetch the message from the API
-    fetch('https://stratamanagement-navy.vercel.app/api/every-day', { method: 'GET' })
-        .then(response => response.text()) // Get the response as plain text
-        .then(message => {
-            // Update the content of the placeholder
-            document.getElementById('daily-task-message').innerText = message;
+    // Fetch the daily tasks from the serverless function
+    fetch('https://stratamanagement-navy.vercel.app/api/daily-tasks')
+        .then(response => response.json()) // Parse the JSON response
+        .then(data => {
+            if (data.success) {
+                const taskList = document.getElementById('daily-task-list');
+                taskList.innerHTML = ''; // Clear any existing tasks
+
+                // Add each task to the list
+                data.tasks.forEach(task => {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = task.task;
+                    taskList.appendChild(listItem);
+                });
+            } else {
+                console.error('Failed to fetch tasks:', data.message);
+            }
         })
         .catch(error => {
-            console.error('Error fetching daily task message:', error);
-            document.getElementById('daily-task-message').innerText = 'Failed to load daily task message.';
+            console.error('Error fetching daily tasks:', error);
         });
 </script>
 

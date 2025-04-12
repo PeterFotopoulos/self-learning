@@ -4,5 +4,51 @@
       "path": "/api/every-day",
       "schedule": "0 0 * * *"
     }
-  ]
+  ],
+  
+  "version": 2,
+  "builds": [
+    {
+      "src": "index.html",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "api/**/*.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/old-path",
+      "dest": "/new-path",
+      "status": 301
+    },
+    {
+      "src": "/api/.*",
+      "dest": "/api/index.js",
+      "headers": [
+        {
+          "key": "X-Custom-Header",
+          "value": "some-value"
+        }
+      ]
+    }
+  ],
+  "env": {
+    "MY_SECRET_KEY": "your_secret_value"
+  },
+  "functions": {
+    "api/**/*.js": {
+      "maxDuration": 10,
+      "memory": 1024
+    }
+  },
+  "regions": ["sfo1", "cdg1"],
+  "alias": "www.mycustomdomain.com",
+  "cleanUrls": true,
+  "trailingSlash": true
+
+
 } 
+
+
