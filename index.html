@@ -37,32 +37,90 @@
 
 
 <!-- Placeholder for the daily task message -->
- <h2>Daily Tasks:</h2>
-<div id="daily-task-message">Loading daily task message...</div>
-<ul id="daily-task-list"></ul> 
+<h2>Daily Tasks:</h2>
+<div id="daily-task-message">
+    Loading daily tasks...
+    <ul id="daily-task-list"></ul>
+</div>
+
 
 <script>
     // Fetch the daily tasks from the serverless function
-    fetch('https://stratamanagement-navy.vercel.app/api/daily-tasks')
-        .then(response => response.json()) // Parse the JSON response
+fetch('https://stratamanagement-navy.vercel.app/api/daily-tasks')
+    .then(response => response.json()) // Parse the JSON response
+    .then(data => {
+        const taskMessageDiv = document.getElementById('daily-task-message');
+        const taskList = document.getElementById('daily-task-list');
+
+        if (data.success) {
+            // Clear the "Loading daily tasks..." text
+            taskMessageDiv.firstChild.textContent = ''; // Remove the loading text
+
+            taskList.innerHTML = ''; // Clear any existing tasks
+
+            // Add each task to the list
+            data.tasks.forEach(task => {
+                const listItem = document.createElement('li');
+                listItem.textContent = task.task;
+
+                // Create a "Complete" button for each task
+                const completeButton = document.createElement('button');
+                completeButton.textContent = 'Complete';
+                completeButton.style.marginLeft = '10px';
+
+                // Add an event listener to handle task completion
+                completeButton.addEventListener('click', () => {
+                    completeTask(listItem);
+                });
+
+                // Append the button to the task item
+                listItem.appendChild(completeButton);
+
+                // Append the task item to the list
+                taskList.appendChild(listItem);
+            });
+        } else {
+            taskMessageDiv.firstChild.textContent = 'Failed to load daily tasks.';
+        }
+    })
+    .catch(error => {
+        console.error('Error fetching daily tasks:', error);
+        document.getElementById('daily-task-message').firstChild.textContent = 'Failed to load daily tasks.';
+    });
+
+// Function to handle task completion
+function completeTask(taskItem) {
+    taskItem.style.textDecoration = 'line-through';
+    taskItem.style.color = 'gray';
+
+    const completeButton = taskItem.querySelector('button');
+    if (completeButton) {
+        completeButton.remove();
+    }
+
+    // Send the completed task to the server
+    fetch('https://stratamanagement-navy.vercel.app/api/complete-task', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ task: taskItem.textContent }),
+    })
+        .then(response => response.json())
         .then(data => {
             if (data.success) {
-                const taskList = document.getElementById('daily-task-list');
-                taskList.innerHTML = ''; // Clear any existing tasks
-
-                // Add each task to the list
-                data.tasks.forEach(task => {
-                    const listItem = document.createElement('li');
-                    listItem.textContent = task.task;
-                    taskList.appendChild(listItem);
-                });
+                console.log(`Task successfully marked as completed: ${taskItem.textContent}`);
             } else {
-                console.error('Failed to fetch tasks:', data.message);
+                console.error('Failed to mark task as completed:', data.message);
             }
         })
         .catch(error => {
-            console.error('Error fetching daily tasks:', error);
+            console.error('Error sending completed task to the server:', error);
         });
+
+
+    
+}
 </script>
 
 </html>
