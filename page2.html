@@ -12,14 +12,14 @@
 
     <!-- Task Submission Form -->
     <form id="taskForm" method="POST" action="/api/add-task">
-        <label for="task">Enter a new task:</label><br>
-        <input type="text" id="task" name="task" placeholder="Enter task here..." required><br><br>
+        <label for="task"></label><br>
+        <input type="text" id="task" name="task" placeholder="Enter task here"><br><br>
         <button type="submit">Add Task</button>
     </form>
 
     <p id="responseMessage"></p>
 
-    <a href="index.html"><p>Back</p></a>
+    <a class = "back-button" href="index.html"><p>Back</p></a>
 
     <script>
         // Handle form submission using JavaScript to send a POST request

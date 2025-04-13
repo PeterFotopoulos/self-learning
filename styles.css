@@ -61,3 +61,9 @@ h2{
     font-size: 2em;
 
 }
+
+.back-button{
+    position:absolute;
+    top: 2%;
+    left: 2%;
+}
